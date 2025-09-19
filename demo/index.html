@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Booking Search Widget Demo</title>
+    <script type="module" src="./your-widget.js"></script>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 2rem;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #f8fafc, #e2e8f0);
+        display: grid;
+        align-content: start;
+        gap: 1.5rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.5rem;
+      }
+
+      pre {
+        background: rgba(15, 23, 42, 0.85);
+        color: #e2e8f0;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        overflow-x: auto;
+        font-size: 0.85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Booking Search Widget Demo</h1>
+    <your-widget
+      token="119|nOEqsrlwtqHSWjQIzu5NVA9rAVfYDf29a1NqTlc3bdbcf8a3"
+      pos="HotelEscuela"
+      locale="es"
+      currency="ARS"
+      product-id="2475"
+      initial-start="2025-09-20"
+      initial-end="2025-09-25"
+    ></your-widget>
+    <pre id="log" aria-live="polite"></pre>
+    <script>
+      const widget = document.querySelector('your-widget');
+      const log = document.getElementById('log');
+      const history = [];
+
+      widget.addEventListener('yw:event', (event) => {
+        history.unshift({
+          type: event.detail.type,
+          payload: event.detail.payload,
+          at: new Date().toISOString(),
+        });
+        history.splice(0, history.length, ...history.slice(0, 12));
+        log.textContent = JSON.stringify(history, null, 2);
+      });
+    </script>
+  </body>
+</html>

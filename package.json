@@ -1,0 +1,44 @@
+{
+  "name": "@pxsol/booking-search-widget",
+  "version": "0.1.0",
+  "description": "Embeddable booking engine search widget with React and Web Component builds.",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsup --config tsup.config.ts",
+    "dev": "tsup --config tsup.config.ts --watch",
+    "typecheck": "tsc --noEmit",
+    "demo": "npm run build && node demo/server.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./wc": "./dist/your-widget.js"
+  },
+  "keywords": [
+    "booking",
+    "widget",
+    "react",
+    "web-component"
+  ],
+  "author": "",
+  "license": "MIT"
+}
